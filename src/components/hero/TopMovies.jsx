@@ -12,7 +12,7 @@ const TopMovies = () => {
         method: "GET",
         headers: {
             	"x-rapidapi-host": "imdb236.p.rapidapi.com",
-	            "x-rapidapi-key" : "e22ee288b3mshbbbd1c6f16875aap1aa8fejsna8d5cda4aff3"
+	            "x-rapidapi-key" : "Add-your-api-key"
         },
       });
       const result = await data.json();
