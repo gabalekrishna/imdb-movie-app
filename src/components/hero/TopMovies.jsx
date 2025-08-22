@@ -1,45 +1,38 @@
-import { useEffect } from "react";
-import { useState } from "react"
+import { useEffect, useState } from "react";
 import MovieCard from "../Card/MovieCard";
-
-
-
+import { Box, Typography } from "@mui/material";
 
 const TopMovies = () => {
-   const [movies, setMovies] = useState([]);
-   const fetchTopMovies = async() => {
-      const data =await fetch("https://imdb236.p.rapidapi.com/api/imdb/top250-movies",{
-        method: "GET",
-        headers: {
-            	"x-rapidapi-host": "imdb236.p.rapidapi.com",
-	            "x-rapidapi-key" : "Add-your-api-key"
-        },
-      });
-      const result = await data.json();
-      setMovies(result)
-   }
-   useEffect(()=> {
-    fetchTopMovies();
-   },[])
-  
-    return (
-        <div>
-           {
-            movies.map((movie,index)=> {
-                return(
-                    <div>
-                       <MovieCard 
-                       img={movie.thumbnails[0].url}
-                       title={movie.originalTitle}
-                        catogry={movie.genres[0]}
-                       />
-                    </div>
-                )
-            })
-           }
-           
-        </div>
-    )
-}
+  const [movies, setMovies] = useState([]);
+
+  const fetchPopularMovies = async () => {
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
+      );
+      const result = await response.json();
+      console.log(result, "Popular Movies");
+      setMovies(result.results); // <-- Important!
+    } catch (error) {
+      console.error("Failed to fetch popular movies:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularMovies();
+  }, []);
+
+  return (
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, padding: 2 }}>
+      {movies.length === 0 ? (
+        <Typography>Loading...</Typography>
+      ) : (
+        movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} img={movie.poster_path}/>
+        ))
+      )}
+    </Box>
+  );
+};
 
 export default TopMovies;
