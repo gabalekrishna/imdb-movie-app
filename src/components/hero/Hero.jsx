@@ -10,7 +10,6 @@ const Hero = () => {
         <div className="navbar-left">
           <img src={imdbLogo} alt="IMDb" className="logo" />
         </div>
-
         <div className="navbar-center">
           <a href="#">Movies</a>
           <a href="#">TV shows</a>

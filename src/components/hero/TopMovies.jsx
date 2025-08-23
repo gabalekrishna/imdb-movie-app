@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../Card/MovieCard";
 import { Box, Typography } from "@mui/material";
+import { Carousel } from "react-responsive-carousel";
+import Slider from "react-slick";
 
 const TopMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -22,15 +24,22 @@ const TopMovies = () => {
     fetchPopularMovies();
   }, []);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    autoplay:true,
+    autoplaySpeed: 500,
+  };
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, padding: 2 }}>
-      {movies.length === 0 ? (
-        <Typography>Loading...</Typography>
-      ) : (
-        movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} img={movie.poster_path}/>
-        ))
-      )}
+    <Box>
+      <Slider {...settings}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} img={movie.poster_path} />
+        ))}
+      </Slider>
     </Box>
   );
 };
