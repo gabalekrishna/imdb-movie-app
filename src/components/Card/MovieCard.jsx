@@ -13,8 +13,12 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import NetflixIcon from "@mui/icons-material/Movie"; // custom replacement
+import { useNavigate } from "react-router-dom";
 
-const MovieCard = ({img,title,rating}) => {
+const MovieCard = ({img,title,rating,id}) => {
+  console.log(useNavigate, "useNavigate")
+
+  const navigate = useNavigate();
   return (
     <Card
       sx={{
@@ -79,8 +83,9 @@ const MovieCard = ({img,title,rating}) => {
               textTransform: "none",
               fontWeight: "bold",
             }}
+            onClick={()=> navigate(`/details/${id}`)}
           >
-            Watch trailer
+            View Details
           </Button>
 
           <Button

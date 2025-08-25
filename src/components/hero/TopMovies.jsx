@@ -8,11 +8,10 @@ const TopMovies = () => {
   const [movies, setMovies] = useState([]);
   const [details, setDetails] = useState([]);
 
-
   const fetchPopularMovies = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
+        "https://api.themoviedb.org/3/movie/popular?api_key=d22e246210cc9bf2d5cae061692dd20c&language=en-US"
       );
       const result = await response.json();
       console.log(result, "Popular Movies");
@@ -22,26 +21,24 @@ const TopMovies = () => {
     }
   };
 
-  const handleMovieDetails = async() => {
-   
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${1061474}/videos?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-      );
-      const result = await response.json();
-      console.log(result, "details movies  Movies");
-      // setMovies(result.results); // <-- Important!
-    } catch (error) {
-      console.error("Failed to fetch popular movies:", error);
-    }
-  }
+  // const handleMovieDetails = async() => {
+
+  //   try {
+  //     const response = await fetch(
+  //       `https://api.themoviedb.org/3/movie/${1061474}/videos?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+  //     );
+  //     const result = await response.json();
+  //     console.log(result, "details movies  Movies");
+  //     // setMovies(result.results); // <-- Important!
+  //   } catch (error) {
+  //     console.error("Failed to fetch popular movies:", error);
+  //   }
+  // }
 
   useEffect(() => {
     fetchPopularMovies();
-    handleMovieDetails()
+    // handleMovieDetails()
   }, []);
-
-
 
   const settings = {
     dots: true,
@@ -52,11 +49,19 @@ const TopMovies = () => {
     // autoplay:true,
     // autoplaySpeed: 500,
   };
+  console.log(movies, "movies");
   return (
     <Box>
       <Slider {...settings}>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} img={movie.poster_path} title={movie.original_title} rating={movie.vote_average}/>
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            img={movie.poster_path}
+            title={movie.original_title}
+            rating={movie.vote_average}
+            id={movie.id}
+          />
         ))}
       </Slider>
     </Box>

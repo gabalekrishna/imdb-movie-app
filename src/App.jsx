@@ -1,23 +1,32 @@
-import SliderSlide from "./components/Card/Slider"
-import Hero from "./components/Hero/Hero"
-import TopMovies from "./components/Hero/TopMovies"
+import TopMovies from "./components/Hero/TopMovies";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HeroSlider from "./components/HeroSlider/HeroSlider";
-
+import { Route, Routes } from "react-router-dom";
+import { DeatilsPage } from "./components/DetailsPage/DeatilsPage";
 
 function App() {
-
   return (
     <>
-    <HeroSlider />
-    <TopMovies />
-    {/* <TopMovies />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HeroSlider />
+              <TopMovies />
+            </>
+          }
+        />
+        <Route path="/details/:id" element={<DeatilsPage/>} />
+      </Routes>
+
+      {/* <TopMovies />
     <TopMovies /> */}
-    {/* <Hero /> */}
-    {/* <HeroSlider /> */}
+      {/* <Hero /> */}
+      {/* <HeroSlider /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
