@@ -14,7 +14,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import NetflixIcon from "@mui/icons-material/Movie"; // custom replacement
 
-const MovieCard = ({img,title,catogry}) => {
+const MovieCard = ({img,title,rating}) => {
   return (
     <Card
       sx={{
@@ -58,14 +58,14 @@ const MovieCard = ({img,title,catogry}) => {
         </Box>
 
         {/* Genre */}
-        <Typography variant="body2" color="gray">
-          {catogry}
-        </Typography>
+        {/* <Typography variant="body2" color="gray">
+          {category}
+        </Typography> */}
 
         {/* Rating */}
         <Box display="flex" alignItems="center" mt={1} mb={2}>
           <Typography sx={{ color: "gold", mr: 0.5 }}>★</Typography>
-          <Typography variant="body2">8.2</Typography>
+          <Typography variant="body2">{rating}</Typography>
         </Box>
 
         {/* Buttons */}
