@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HeroSlider from "./components/HeroSlider/HeroSlider";
 import { Route, Routes } from "react-router-dom";
-import { DeatilsPage } from "./components/DetailsPage/DeatilsPage";
+import { DetailsPage } from "./components/DetailsPage/DeatilsPage";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
             </>
           }
         />
-        <Route path="/details/:id" element={<DeatilsPage/>} />
+        <Route path="/details/:id" element={<DetailsPage/>} />
       </Routes>
 
       {/* <TopMovies />
