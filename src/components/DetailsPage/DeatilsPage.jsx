@@ -48,6 +48,7 @@ export const DetailsPage = () => {
         );
         const data = await res.json();
         setVideos(data);
+        console.log(data, "videos")
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
