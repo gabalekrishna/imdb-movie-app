@@ -4,14 +4,14 @@ import { Box, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import Slider from "react-slick";
 
-const TopMovies = () => {
+const TopMovies = ({type, data1}) => {
   const [movies, setMovies] = useState([]);
   const [details, setDetails] = useState([]);
 
   const fetchPopularMovies = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=d22e246210cc9bf2d5cae061692dd20c&language=en-US"
+        `https://api.themoviedb.org/3/${type}/popular?api_key=d22e246210cc9bf2d5cae061692dd20c&language=en-US`
       );
       const result = await response.json();
       console.log(result, "Popular Movies");
@@ -38,7 +38,7 @@ const TopMovies = () => {
   useEffect(() => {
     fetchPopularMovies();
     // handleMovieDetails()
-  }, []);
+  }, [type]);
 
   const settings = {
     dots: true,
@@ -61,6 +61,7 @@ const TopMovies = () => {
             title={movie.original_title}
             rating={movie.vote_average}
             id={movie.id}
+            data1={data1}
           />
         ))}
       </Slider>

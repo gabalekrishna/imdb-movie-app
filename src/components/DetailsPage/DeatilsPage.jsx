@@ -64,6 +64,11 @@ export const DetailsPage = () => {
     setModalOpen(false)
   }
 
+  const trailerkey = () => {
+    const trailer = videos.results.find((vid) => vid.type === "Trailer" && vid.site === "YouTube")
+    return trailer ? trailer.key : null;
+  }
+
   if (!movie) return <Typography>Loading...</Typography>;
 
   const getUserScore = (vote) => Math.round(vote * 10); // 7.8 => 78%
@@ -203,30 +208,57 @@ export const DetailsPage = () => {
         </Box>
       </Box>
       {modalOpen && (
-        <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+  <Dialog
+    open={modalOpen}
+    onClose={handleClose}
+    maxWidth="md"
+    fullWidth
+  >
+    <DialogTitle>Trailer</DialogTitle>
+    <DialogContent
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        p: 0,
+      }}
+    >
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          paddingTop: "56.25%", // 16:9 aspect ratio
+        }}
       >
-       <DialogContent>
-        <Box>
-          <iframe 
-            title="Trailer"
-            src={`https://www.youtube.com/embed/${videos?.results[0]?.key}`}
-            style={{
-               width: "100%",
-               height: "100%"
-            }}
-          />
-          
-        </Box>
-       </DialogContent>
-      </Dialog>
+        <iframe
+          title="Trailer"
+          src={`https://www.youtube.com/embed/${trailerkey()}`}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            border: "none",
+            borderRadius: "8px",
+          }}
+          allowFullScreen
+        />
+      </Box>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleClose} color="primary">
+        Close
+      </Button>
+    </DialogActions>
+  </Dialog>
+)}
 
-      )}
     </Box>
   );
 };
 // https://www.youtube.com/embed/1RC_GIuShTQ
 // hbPTIAQZtT4
+
+
+// https://api.themoviedb.org/3/account/null/favorite/movies?language=en-US&page=1&sort_by=created_at.asc

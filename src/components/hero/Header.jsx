@@ -5,6 +5,8 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
+
+  const account = "2425526";
   return (
     <AppBar
       position="static"

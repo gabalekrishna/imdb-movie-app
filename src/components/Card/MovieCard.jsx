@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useContext, useState } from "react";
 import {
   Card,
   CardMedia,
@@ -20,14 +20,14 @@ import ListIcon from "@mui/icons-material/List";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const MovieCard = ({ img, title, rating, id }) => {
+
+  const user = useContext(UserContext)
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [favorite, setFavorite] = useState(false);
-
-
-  
   const open = Boolean(anchorEl);
 
   const handleToggle = ()=>{
@@ -41,6 +41,7 @@ const MovieCard = ({ img, title, rating, id }) => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
   const handleFavorite = async() => {
     try{
       const favoriteData = await fetch("https://api.themoviedb.org/3/account/22243362/favorite", {

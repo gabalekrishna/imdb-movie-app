@@ -5,28 +5,42 @@ import HeroSlider from "./components/HeroSlider/HeroSlider";
 import { Route, Routes } from "react-router-dom";
 import { DetailsPage } from "./components/DetailsPage/DeatilsPage";
 import Header from "./components/hero/Header";
+import { createContext, useState } from "react";
+import LoginPage from "./Login";
+
+
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState({name: "krishna", age: 26})
+
+  const [tab, setTab] = useState(1)
+  const tabChange = () => {
+    setTab(2)
+  }
+
+ const data1 = "234"
+
+
   return (
     <>
-    <Header/>
+   
+    {/* <Header /> */}
       <Routes>
         <Route
           path="/"
           element={
             <>
-              {/* <HeroSlider /> */}
-              <TopMovies />
+              <LoginPage />
             </>
           }
         />
-        <Route path="/details/:id" element={<DetailsPage/>} />
-      </Routes>
+         <Route path="/home" element={<div>
+          <Header /><TopMovies type="movie"/>
+         </div>} />
 
-      {/* <TopMovies />
-    <TopMovies /> */}
-      {/* <Hero /> */}
-      {/* <HeroSlider /> */}
+        <Route path="/details/:id" element={<DetailsPage />} />
+      </Routes>
     </>
   );
 }
