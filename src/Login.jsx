@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -10,8 +10,16 @@ import {
   Alert,
   CircularProgress,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
 
 const LoginPage = () => {
+
+  const { user,login } = useContext(AuthContext)
+
+  console.log(user,login, "user from context")
+
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
@@ -25,11 +33,13 @@ const LoginPage = () => {
             },
         })
         console.log(response, "response")
-        if(response.ok){
-            navigate("/home")
-        }
+        console.log(response.ok, "response.ok")
         const result = await response.json();
         setUserData(result)
+        login(result)
+        if(response.ok){
+          navigate("/home")
+      }
         console.log(result, "result")
     }
  

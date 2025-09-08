@@ -7,6 +7,7 @@ import { DetailsPage } from "./components/DetailsPage/DeatilsPage";
 import Header from "./components/hero/Header";
 import { createContext, useState } from "react";
 import LoginPage from "./Login";
+import { AuthProvider } from "./context/AuthContext";
 
 
 export const UserContext = createContext();
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <>
-   
+   <AuthProvider>
     {/* <Header /> */}
       <Routes>
         <Route
@@ -41,6 +42,7 @@ function App() {
 
         <Route path="/details/:id" element={<DetailsPage />} />
       </Routes>
+      </AuthProvider>
     </>
   );
 }

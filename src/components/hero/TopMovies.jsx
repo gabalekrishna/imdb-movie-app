@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MovieCard from "../Card/MovieCard";
 import { Box, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import Slider from "react-slick";
+import { AuthContext } from "../../context/AuthContext";
 
 const TopMovies = ({type, data1}) => {
+  const { user } = useContext(AuthContext)
+  console.log(user, "userData")
   const [movies, setMovies] = useState([]);
   const [details, setDetails] = useState([]);
 
@@ -52,6 +55,7 @@ const TopMovies = ({type, data1}) => {
   console.log(movies, "movies");
   return (
     <Box>
+      <h1>User has been logdin: {user?.username} {user?.id}</h1>
       <Slider {...settings}>
         {movies.map((movie) => (
           <MovieCard
