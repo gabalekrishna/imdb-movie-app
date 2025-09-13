@@ -22,7 +22,7 @@ function App() {
 
  const data1 = "234"
 
-
+  
   return (
     <>
    <AuthProvider>

@@ -38,7 +38,9 @@ const LoginPage = () => {
         setUserData(result)
         login(result)
         if(response.ok){
+          localStorage.setItem("token", token)
           navigate("/home")
+
       }
         console.log(result, "result")
     }
