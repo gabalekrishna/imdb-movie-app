@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { AppBar, Toolbar, Typography, Box, IconButton, Button, Avatar } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  Button,
+  Avatar,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,15 +15,21 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const {user, login, logout} = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { user, login, logout } = useContext(AuthContext);
+  // const navigate = useNavigate()
   const handleLogout = () => {
     logout();
-    navigate("/")
-    
-  }
-  console.log(user, "user from context")
+    navigate("/");
+  };
+  console.log(user, "user from context");
   const account = "2425526";
+  const navigate = useNavigate();
+  const menuItems = [
+    { label: "Movies", route: "/movies" },
+    { label: "TV Shows", route: "/tv-shows" },
+    { label: "People", route: "/people" },
+    { label: "favorite", route: "/favorite" },
+  ]
   return (
     <AppBar
       position="static"
@@ -35,18 +49,20 @@ const Header = () => {
             TMDB
           </Typography>
           <Box display="flex" gap={3}>
-            {["Movies", "TV Shows", "People", "More"].map((item) => (
-              <Button
-                key={item}
-                sx={{
-                  color: "white",
-                  textTransform: "none",
-                  fontWeight: 500,
-                }}
-              >
-                {item}
-              </Button>
-            ))}
+          {
+            menuItems.map((item)=> {
+              return (
+                <Button
+                onClick={() => navigate(item.route)}
+                >
+                  {item.label}
+                </Button>
+
+              )
+            })
+
+          }
+           
           </Box>
         </Box>
         <Box display="flex" alignItems="center" gap={2}>
@@ -75,7 +91,9 @@ const Header = () => {
             <SearchIcon />
           </IconButton>
         </Box>
-        <Button variant="contained" onClick={handleLogout}>Logout</Button>
+        <Button variant="contained" onClick={handleLogout}>
+          Logout
+        </Button>
       </Toolbar>
     </AppBar>
   );

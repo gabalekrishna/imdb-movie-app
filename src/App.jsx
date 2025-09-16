@@ -8,6 +8,8 @@ import Header from "./components/hero/Header";
 import { createContext, useState } from "react";
 import LoginPage from "./Login";
 import { AuthProvider } from "./context/AuthContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
+import Favorite from "./pages/Favorite";
 
 
 export const UserContext = createContext();
@@ -26,6 +28,7 @@ function App() {
   return (
     <>
    <AuthProvider>
+    <FavoritesProvider>
     {/* <Header /> */}
       <Routes>
         <Route
@@ -41,8 +44,12 @@ function App() {
          </div>} />
 
         <Route path="/details/:id" element={<DetailsPage />} />
+
+        <Route path="/favorite" element={<Favorite/>} />
       </Routes>
+      </FavoritesProvider>
       </AuthProvider>
+     
     </>
   );
 }

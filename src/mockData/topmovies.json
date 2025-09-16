@@ -1,0 +1,20 @@
+{
+    "status": 0,
+    "statusCode": "OK",
+    "data": {
+        "result": {
+            "result": 6,
+            "id": 1,
+            "exception": null,
+            "status": 5,
+            "isCanceled": false,
+            "isCompleted": true,
+            "isCompletedSuccessfully": true,
+            "creationOptions": 0,
+            "asyncState": null,
+            "isFaulted": false
+        }
+    },
+    "errorMessage": null,
+    "details": null
+}

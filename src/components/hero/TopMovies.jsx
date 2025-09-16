@@ -5,12 +5,17 @@ import { Carousel } from "react-responsive-carousel";
 import Slider from "react-slick";
 import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../api/useFetch";
+import Favorite from "@mui/icons-material/Favorite";
+import { FavoritesContext } from "../../context/FavoritesContext";
 
 const TopMovies = ({type, data1}) => {
   const { user } = useContext(AuthContext)
   console.log(user, "userData")
   const [movies, setMovies] = useState([]);
   const [details, setDetails] = useState([]);
+
+  const {favorites} = useContext(FavoritesContext)
+  console.log(favorites, "favorite")
 
   // const fetchPopularMovies = async () => {
   //   try {
