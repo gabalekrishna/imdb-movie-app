@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { use, useContext, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,6 +7,7 @@ import {
   IconButton,
   Button,
   Avatar,
+  TextField,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -30,6 +31,8 @@ const Header = () => {
     { label: "People", route: "/people" },
     { label: "favorite", route: "/favorite" },
   ]
+  const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   return (
     <AppBar
       position="static"
@@ -87,14 +90,16 @@ const Header = () => {
             <NotificationsNoneIcon />
           </IconButton>
           <Avatar sx={{ bgcolor: "crimson", fontWeight: "bold" }}>K</Avatar>
-          <IconButton sx={{ color: "cyan" }}>
+          <IconButton sx={{ color: "cyan" }} onClick={!setIsSearching}>
             <SearchIcon />
           </IconButton>
+          
         </Box>
         <Button variant="contained" onClick={handleLogout}>
           Logout
         </Button>
       </Toolbar>
+    
     </AppBar>
   );
 };

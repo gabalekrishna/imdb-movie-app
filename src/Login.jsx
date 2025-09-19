@@ -15,9 +15,7 @@ import { AuthContext } from "./context/AuthContext";
 
 const LoginPage = () => {
 
-  const { user,login } = useContext(AuthContext)
-
-  console.log(user,login, "user from context")
+   const { login } = useContext(AuthContext)
 
     const navigate = useNavigate();
     const [username, setUsername] = useState("");

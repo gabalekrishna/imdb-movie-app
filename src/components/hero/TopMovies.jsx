@@ -1,21 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import MovieCard from "../Card/MovieCard";
-import { Box, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import Slider from "react-slick";
 import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../api/useFetch";
 import Favorite from "@mui/icons-material/Favorite";
 import { FavoritesContext } from "../../context/FavoritesContext";
+import Search from "./Search";
 
 const TopMovies = ({type, data1}) => {
-  const { user } = useContext(AuthContext)
-  console.log(user, "userData")
+  const {user} = useContext(AuthContext)
+  console.log(user, "user from context")
+
+  const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+
+
   const [movies, setMovies] = useState([]);
   const [details, setDetails] = useState([]);
-
-  const {favorites} = useContext(FavoritesContext)
-  console.log(favorites, "favorite")
 
   // const fetchPopularMovies = async () => {
   //   try {
@@ -72,8 +76,10 @@ const TopMovies = ({type, data1}) => {
   console.log(movies, "movies");
   return (
     <Box>
+     
       <h1>User has been logdin: {user?.username} {user?.id}</h1>
-      <Slider {...settings}>
+      <Search />
+      {/* <Slider {...settings}>
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}
@@ -85,7 +91,21 @@ const TopMovies = ({type, data1}) => {
             data1={data1}
           />
         ))}
-      </Slider>
+      </Slider> */}
+
+    {/* <button onClick={() => setIsSearching(!isSearching)}>Search</button>
+    {`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=1`}
+      {/* {
+        isSearching && ( */}
+          {/* <TextField 
+           placeholder="Search..."
+            variant="outlined"
+            fullWidth
+            onChange={(e)=>setSearch(e.target.value)}
+          /> */}
+        {/* )
+      } */}
+
     </Box>
   );
 };
