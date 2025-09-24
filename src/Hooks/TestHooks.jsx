@@ -1,57 +1,64 @@
-// useState 
-// React hook
-// it allows you to add state to funcational components 
-// it allows you tio update the state and re-render the component when the value or state changes 
+// useEffect 
+// WHat is useEffect?
+// useEffect is a hook that allows you to perform side effects in function components.
 
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 
-const TestHooks = () => {
-    const [count, setCount] = useState(0);
-    const [name, setName] = useState("");
-    const [inputValue, setInputValue] = useState("");
-    // count is your current or updated value 
-    // setCount is a function that allows you to update the value of count
-
-    const handleClick = () => {
-        console.log(name)
-        setInputValue(name);
-    }
-
-    const handleAdd = ()=> {
-        setCount(count +5)
-        setCount(count +5)
-        setCount(count +5)
-        setCount((prev)=>prev + 5);
-        setCount((prev)=>prev + 5);
-        setCount((prev)=>prev + 5);
-    }
-
-    return (
-        <>
-        <h1>This is useState learing.....</h1>
-        <h4>{count}</h4>
-        <button onClick={()=> setCount(count + 1)}>inc by 1</button>
-        <button
-        onClick={handleAdd}
-        >
-            inc by 5
-        </button>
-
-        <input
-        value={inputValue}
-        onChange={(e)=>setName(e.target.value)}
-        />
-        <button onClick={handleClick}>name</button>
-        <h4>{inputValue}</h4>
-        </>
-
-    )
+const TestHooks  = () => {
+  const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(2);
+  const [postData, setPostData] = useState([]);
 
 
+  const handleApi = async() => {
+    const url =await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await url.json();
+    setPostData(data)
+    console.log(data ,"data")
+  }
 
+  console.log(postData, "postData")
+  
+
+  
+  // useEffect(()=> {
+  //   console.log("mounting")
+    
+  // },[])
+
+  // useEffect(()=>{
+  // console.log("count mounting" + count)
+  
+  // },[count])
+
+  // useEffect(()=>{
+  //   console.log("count mounting" + count)
+  // },[count2])
+  useEffect(()=>{
+    console.log("without dependency array");
+    handleApi();
+  },[])
+  // life 1) mounting, 2)updating, 3unmounting
+  
+  return (
+    <div>
+      <h1>TestHooks</h1>
+      <button onClick={()=>setCount(count +1)}>click</button>
+
+
+      <button onClick={()=>setCount2(count2 +1)}>click button 2</button>
+      {
+        postData.map((item)=> {
+         return(
+          <h4>{item.title}</h4>
+         )
+        })
+      }
+    </div>
+  )
 }
-
 
 export default TestHooks;
